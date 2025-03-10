@@ -30,6 +30,60 @@ In case of functions, if return type is auto, that will be evaluated by return t
 
 > The variable declared with auto keyword should be initialized at the time of its declaration only or else there will be a compile-time error.
 
+> We can use `typeid()` to get type of the variables (when we want to know dynamic type of object)
+
+```cpp
+void examples_auto() {
+  // /*/cpp_11/src/my_lib.cpp:5:3: error: declaration of ‘auto a’ has no initializer
+  #ifdef __AUTO_DECL_ERROR__ 
+  auto a; 
+  #endif
+
+  auto x = 4;
+  auto y = 3.37;
+  auto z = 3.37f;
+  auto c = 'a';
+  auto ptr = &x;
+  auto pptr = &ptr; //pointer to a pointer
+  cout << typeid(x).name() << endl
+        << typeid(y).name() << endl
+        << typeid(z).name() << endl
+        << typeid(c).name() << endl
+        << typeid(ptr).name() << endl
+          << typeid(pptr).name() << endl;
+
+}
+```
+
+typeid(x).name() returns the data type of x, for example, it returns:
+  - ‘i’ for integers, ‘d’ for doubles,
+  -  ‘f’ for float, ‘c’ for char, 
+  -  Pi’ for the pointer to the integer,
+  -  ‘Pd’ for the pointer to double,’
+  -  Pf’ for the pointer to float, 
+  -  ‘Pc’ for the pointer to char,
+  -  ‘PPi’ for the pointer to pointer to integer.
+  -  Single Pointer results in  prefix ‘P’,
+  -  double-pointer results in ‘PP’ as a prefix and so on.
+
+
+__Use case__: To avoid long initialization when creating iterators for containers
+
+```cpp
+int main(){
+// Create a set of strings
+  set<string> st;
+  st.insert({ "geeks", "for", "geeks", "org" });
+
+  // 'it' evaluates to iterator to set of string
+  // type automatically
+  for (auto it = st.begin(); it != st.end(); it++)
+    cout << *it << " ";
+
+  return 0;
+}
+```
+
 ### Decltype
 
 

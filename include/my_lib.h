@@ -8,6 +8,10 @@ using namespace std;
 
 // Auto type deduction and decltype
 
+#ifdef __FLAG_AUTO__
+void examples_auto();
+#endif
+
 // Range based for loops
 
 // Lambda expressions
