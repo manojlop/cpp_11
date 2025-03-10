@@ -84,6 +84,12 @@ int main(){
 }
 ```
 
+**auto becomes int type if even an integer reference is assigned to it. To make it reference type, we use auto &.**
+
+- Function that returns a ‘reference to int’ type : int& fun() {};
+- m will default to int type instead of int& type : auto m = fun();
+- n will be of int& type because of use of extra & with auto keyword : auto& n = fun();
+
 ### Decltype
 
 
