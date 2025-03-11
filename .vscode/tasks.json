@@ -6,7 +6,7 @@
       "command": "/usr/bin/g++",
       "args": [
         "-fdiagnostics-color=always",
-        "-D", "__FLAG_AUTO__",
+        "-D", "__FLAG_LAMBDA__",
         "-I${workspaceFolder}/include",
         "-g",
         "${workspaceFolder}/src/**.cpp",
