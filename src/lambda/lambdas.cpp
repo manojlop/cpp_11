@@ -105,21 +105,63 @@ void custom_sort(){
 
 
 void recursive_lambda(){
+
   // TODO: Create a recursive lambda to calculate factorial
   // Hint: You'll need to use std::function and a reference capture
+
+  std::function<int(int)> f1 = [&f1](int x)->int {  
+    if(x == 0 || x == 1) 
+      return 1; 
+    else return f1(x-1) + f1(x-2);  
+  };
+  
+  auto f2 = [](int x){
+    auto lambda = [](int x, const auto& ff)->int {  
+      if(x == 0 || x == 1) 
+        return 1;
+      else return ff(x-1,ff) + ff(x-2,ff); 
+    };
+    return lambda(x,lambda);
+  };
+
+  auto fib = [](int x, const auto& lambda)->int {  
+    if(x == 0 || x == 1) 
+      return 1; 
+    else return lambda(x-1,lambda) + lambda(x-2, lambda);  
+  };
+
+  cout << "Fib: " << fib(5,fib) << endl;
+  cout << "Fib: " << f2(5) << endl;
+  cout << "Fib: " << f1(5) << endl;
 }
 
+// This function takes a vector and a function to process each element
+void process_vector(const std::vector<int>& vec /* TODO: Add function parameter type */) {
+  for (const auto& element : vec) {
+    // TODO: Call the function on each element
+  }
+}
 
 void func_param_lambda(){
-
+  vector<int> numbers = {1, 2, 3, 4, 5};
+    
+  // TODO: Call process_vector with a lambda that prints each number multiplied by itself
+    
 }
 
 void immediate_invocation_lambda(){
-
+  // TODO: Create and immediately invoke a lambda to initialize a vector 
+  // with 10 random numbers between 1 and 100
+    
 }
 
 
 void generic_print_lambda(){
-
+  vector<int> integers = {1, 2, 3};
+  vector<double> doubles = {1.1, 2.2, 3.3};
+  vector<string> strings = {"one", "two", "three"};
+  
+  // TODO: Create a generic lambda that can print elements of any vector type
+  // Use it to print all three vectors
 }
 // #endif

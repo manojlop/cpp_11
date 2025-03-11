@@ -101,6 +101,42 @@ This example sorts a vector of `Person` objects first by name alphabetically, th
 
 ## Advanced Lambda Techniques
 
+### Recursively calculate fibonacci
+
+```cpp
+
+void recursive_lambda(){
+
+  // TODO: Create a recursive lambda to calculate factorial
+  // Hint: You'll need to use std::function and a reference capture
+
+  std::function<int(int)> f1 = [&f1](int x)->int {  
+    if(x == 0 || x == 1) 
+      return 1; 
+    else return f1(x-1) + f1(x-2);  
+  };
+  
+  auto f2 = [](int x){
+    auto lambda = [](int x, const auto& ff)->int {  
+      if(x == 0 || x == 1) 
+        return 1;
+      else return ff(x-1,ff) + ff(x-2,ff); 
+    };
+    return lambda(x,lambda);
+  };
+
+  auto fib = [](int x, const auto& lambda)->int {  
+    if(x == 0 || x == 1) 
+      return 1; 
+    else return lambda(x-1,lambda) + lambda(x-2, lambda);  
+  };
+
+  cout << "Fib: " << fib(5,fib) << endl;
+  cout << "Fib: " << f2(5) << endl;
+  cout << "Fib: " << f1(5) << endl;
+}
+```
+
 
 ## Best Practices for Advanced Lambdas
 
