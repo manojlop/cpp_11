@@ -68,4 +68,58 @@ public:
   }
 };
 
+
+class str {
+private:
+
+public:
+  char* data;
+
+  str(const char* d){
+    size_t size = strlen(d) + 1;
+    data = new char[size];
+    memcpy(data, d, size);
+  }
+
+  ~str(){
+    delete[] data;
+  }
+
+  str(const str& rhs){
+    size_t size = strlen(rhs.data) + 1;
+    data = new char[size];
+    memcpy(data, rhs.data, size);
+
+    cout << "Copy constructor" << endl;
+  }
+
+  str(str&& rhs) {
+    data = rhs.data;
+    rhs.data = nullptr;
+
+    cout << "Move constructor" << endl;
+  }
+
+  str& operator=(str rhs){
+    swap(data, rhs.data);
+    cout << "Move operator" << endl;
+    return *this;
+  }
+
+  str operator+(const str& rhs) const {
+    size_t size1 = strlen(data);
+    size_t size2 = strlen(rhs.data);
+    
+    char* newData = new char[size1 + size2 + 1];  // Allocate memory
+    memcpy(newData, data, size1);
+    memcpy(newData + size1, rhs.data, size2 + 1);  // Copy with null terminator
+
+    str result(newData);
+
+    delete[] newData;
+
+    return result;  // Return a new str object (RVO will optimize)
+  }
+};
+
 #endif

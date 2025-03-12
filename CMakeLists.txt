@@ -54,6 +54,8 @@ target_compile_options(main PRIVATE
     -Wall               # Enable all warnings
     -Wextra             # Enable extra warnings
     -pedantic           # Ensure compliance with language standards
+    -O0
+    -fno-elide-constructors
 )
 
 # Define preprocessor macros

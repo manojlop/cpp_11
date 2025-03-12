@@ -21,6 +21,7 @@
     "regex": "cpp",
     "valarray": "cpp",
     "chrono": "cpp",
-    "numbers": "cpp"
+    "numbers": "cpp",
+    "sstream": "cpp"
   }
 }

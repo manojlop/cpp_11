@@ -137,9 +137,9 @@ void recursive_lambda(){
 
 // This function takes a vector and a function to process each element
 void process_vector(const std::vector<int>& vec /* TODO: Add function parameter type */) {
-  for (const auto& element : vec) {
-    // TODO: Call the function on each element
-  }
+  // for (const auto& element : vec) {
+  //   // TODO: Call the function on each element
+  // }
 }
 
 void func_param_lambda(){

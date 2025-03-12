@@ -15,6 +15,8 @@ void printv(const vector<T>& vect){
     cout  << v << " ";
 }
 
+class str;
+
 
 // Auto type deduction and decltype
 
@@ -39,6 +41,7 @@ void lambda_sort();
 void first_divisible();
 void lambda_transform();
 void filter_with_predicates(int val);
+// Advanced lambdas
 void custom_sort();
 void recursive_lambda();
 void func_param_lambda();
@@ -46,9 +49,14 @@ void immediate_invocation_lambda();
 void generic_print_lambda();
 #endif
 
-// Advanced lambdas
 
 // Move semantics
+
+#ifdef __FLAG_MOVE_SEM__
+void move_sem_first_example();
+str createStr();
+void move_sem_constructor();
+#endif
 
 // Perfect forwarding
 

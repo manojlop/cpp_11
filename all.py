@@ -26,6 +26,12 @@ def main():
     
     # Parse arguments
     args = parser.parse_args()
+
+    clean_script = os.path.join(script_dir, "clean.py")
+    clean_command = [sys.executable, clean_script]
+
+    print(f"Running clean script: {' '.join(clean_command)}")
+    build_result = subprocess.run(clean_command)
     
     # Construct command for the build script
     build_script = os.path.join(script_dir, "compile.py")

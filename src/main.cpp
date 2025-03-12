@@ -1,6 +1,13 @@
 #include "my_lib.h"
+#include "helper_struct.h"
 
 int main() {
+
+
+  #ifdef __FLAG_MOVE_SEM__
+  move_sem_first_example();
+  move_sem_constructor();
+  #endif
 
   #ifdef __FLAG_LAMBDA__
   lambda_sort();
