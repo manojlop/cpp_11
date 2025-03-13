@@ -3,6 +3,9 @@
 
 int main() {
 
+  #ifdef __FLAG_PERF_FORW__
+    perfect_forward_example();
+  #endif
 
   #ifdef __FLAG_MOVE_SEM__
   move_sem_first_example();

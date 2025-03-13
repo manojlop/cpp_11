@@ -54,3 +54,30 @@ void move_sem_constructor(){
 }
 
 #endif
+
+#ifdef __FLAG_PERF_FORW__
+void process(const Person& lvalArg){
+  cout << "Proces lvalues for: " << lvalArg << endl;
+}
+void process(Person&& rvalArg){
+  cout << "Proces rvalues for: " << rvalArg << endl;
+}
+
+void perfect_forward_example(){
+  Person p("Mike", 30);
+  logAndProcess(p); // call with lvalue
+  logAndProcess(std::move(p)); // call with rvalue
+  
+  logAndProcessForward(p); // call with lvalue
+  logAndProcessForward(std::move(p)); // call with rvalue
+
+  /*
+  Proces lvalues for: Name: Mike, Age: 30
+  Proces rvalues for: Name: Mike, Age: 30
+  Proces lvalues for: Name: Mike, Age: 30
+  Proces lvalues for: Name: Mike, Age: 30
+  */
+}
+#endif
+
+

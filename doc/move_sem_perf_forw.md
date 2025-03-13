@@ -184,7 +184,58 @@ Moving a value out of an object generally modifies the object, so the langage sh
 
 ## Perfect Forwarding
 
-<!-- Todo -->
+It's the act of passing a function's parameters to another function while preserving its reference category.\
+Commonly used by wrapper methods that want to pass their parameters through to another function
+
+```cpp
+template<typename T, typename... Args>
+std::unique_ptr<T> make_unique(Args&&... args)
+{
+  return std::unique_ptr<T>(new T(std::forward<Args>(args)...));
+}
+```
+
+Function takes its parameters and forwards them to T constructor(`perfectly`), meaning that if original value is an rvalue reference, the constructor recieves rvalue reference (lvalue -> lvalue).
+
+> Catch is, it can forward only objects. It can't forward _braced things that are trying to become objects_
+
+```cpp
+struct Point
+{
+  int x, y;
+};
+
+struct Segment
+{
+  Segment(Point p1, Point p2);
+};
+
+void test()
+{
+  // This works
+  Segment s({ 1, 1 }, { 2, 2 });
+
+  // This doesn't
+  auto p = std::make_unique<Segment>({ 1, 1 }, { 2, 2 });
+}
+```
+
+We can observe that in the make_unique ({},{}), braces would become Points at some time.\
+But the compiler sees the parameters as stuff in curly braces, which is not an object\
+Point is lightweight, and we don't need it, but we can do something like this:
+
+```cpp
+struct Segment
+{
+  Segment(Point p1, Point p2);
+
+  template<typename Arg1 = Point,typename Arg2 = Point>
+  static std::unique_ptr<Segment> make_unique(Arg1&& p1, Arg2&& p2){
+    return std::make_unique<Segment>(std::forward<Arg1>(p1), std::forward<Arg2>(p2));
+  }
+};
+```
+
 
 ### Understanding `std::forward`
 

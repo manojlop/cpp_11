@@ -16,6 +16,7 @@ void printv(const vector<T>& vect){
 }
 
 class str;
+class Person;
 
 
 // Auto type deduction and decltype
@@ -60,6 +61,26 @@ void move_sem_constructor();
 
 // Perfect forwarding
 
+#ifdef __FLAG_PERF_FORW__
+
+void process(const Person& lvalArg);
+void process(Person&& rvalArg);
+
+template<typename T>
+void logAndProcessForward(T&& param) { 
+  cout << "Calling 'process', forwards" << endl;
+  process(param);
+};
+
+template<typename T>
+void logAndProcess(T&& param) { 
+  cout << "Calling 'process'" << endl;
+  process(std::forward<T>(param));
+}
+
+void perfect_forward_example();
+
+#endif
 // Smart pointers
 
 // Variadic templates
